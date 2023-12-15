@@ -1,13 +1,14 @@
 package org.java.spring.photo.pojo;
 
+import java.util.Arrays;
+import java.util.List;
 import org.hibernate.validator.constraints.Length;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Pattern;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Photo {
@@ -29,14 +30,26 @@ public class Photo {
 	
 	private boolean visible;
 	
+//	DB Relations
+	@ManyToMany
+	private List<Category> categories;
+	
+	public List<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+	
 //  Constructors
 	public Photo() {
 	}
-	public Photo(String title, String description, String url, boolean visible) {
+	public Photo(String title, String description, String url, boolean visible, Category... categories ) {
 		setTitle(title);
 		setDescription(description);
 		setUrl(url);
 		setVisible(visible);
+		setCategories(Arrays.asList(categories));
 	}
 	
 //	Getters & Setters
