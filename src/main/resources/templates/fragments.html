@@ -84,6 +84,7 @@
 			<div class="d-flex">
 				<div sec:authorize="hasAuthority('ADMIN')" class="me-1">
 					<a th:insert="~{fragments :: button-detail(@{'/create'}, 'Crea nuova foto')}"></a>
+					<a th:insert="~{fragments :: button-detail(@{'/index-categories'}, 'Categorie')}"></a>
 				</div>
 				<a th:if="${#authorization.expression('isAnonymous()')}"
 					th:insert="~{fragments :: button-detail(@{'/login'}, 'Login')}"></a>

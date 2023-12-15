@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments :: head}"></head>
+
+<body>
+	<header th:insert="~{fragments :: header}"></header>
+	
+	<div class="container">
+		<div class="title d-flex justify-content-center">
+			<th:block th:if="${action.equals('create')}">
+				<h1>Aggiungi nuova categoria:</h1>
+			</th:block>
+			<th:block th:if="${action.equals('edit')}">
+				<h1>Modifica categoria:</h1>
+			</th:block>
+		</div>
+
+		<form method="POST" th:object="${category}">
+			<div class="mb-3">
+
+				<label for="name" class="form-label">Nome</label>
+				<input type="text" class="form-control" id="name"
+					th:field="*{name}">
+				<div th:if="${#fields.hasErrors('name')}" class="text-danger">
+					<ul>
+						<li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="button-container">
+				<th:block th:if="${action.equals('create')}">
+					<button class="btn btn-danger">Aggiungi</button>
+				</th:block>
+				<th:block th:if="${action.equals('edit')}">
+					<button class="btn btn-danger">Aggiorna categoria</button>
+				</th:block>
+			</div>
+		</form>
+	</div>
+
+</body>
+
+</html>

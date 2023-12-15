@@ -97,4 +97,13 @@ public class PhotoController {
 		photoService.deleteById(id);
 		return "redirect:/";
 	}
+	
+	@GetMapping("/index-categories")
+	public String getIngredients(Model model) {
+		
+		List<Category> categories = categoryService.findAll();
+		model.addAttribute("list", categories);
+		
+		return "IndexCategories";
+	}
 }
