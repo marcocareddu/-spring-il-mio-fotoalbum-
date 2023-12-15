@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments :: head}"></head>
+
+<body>
+	<header th:insert="~{fragments :: header}"></header>
+
+	<div class="container">
+		<div class="title d-flex justify-content-center my-3">
+			<h1><i class="fa-solid fa-camera-retro text-primary"></i> Le foto:</h1>
+		</div>
+
+		<!-- Search bar -->
+		<div class="d-flex justify-content-center">
+			<form>
+				<div class="input-group my-3 search-container">
+					<input type="text" name="searched" class="form-control" placeholder="Ricerca una foto"
+						th:value="${searched}">
+				</div>
+			</form>
+		</div>
+
+		<!-- If list is empty -->
+		<th:block th:if="${list.isEmpty()}">
+			<div class="title d-flex justify-content-center mt-5">
+				<h1>Non è presente nessuna foto</h1>
+			</div>
+		</th:block>
+
+		<!-- If list contains elements -->
+		<th:block th:if="${!list.isEmpty()}">
+			<div class="card-container d-flex row row-cols-4 justify-content-center">
+				<div th:replace="~{fragments :: card(${list})}"></div>
+			</div>
+		</th:block>
+	</div>
+</body>
+
+</html>

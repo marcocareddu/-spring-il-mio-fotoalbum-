@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments :: head}"></head>
+
+<body>
+	<header th:insert="~{fragments :: header}"></header>
+
+	<div class="container">
+		<div class="title d-flex justify-content-center">
+			<th:block th:if="${action.equals('create')}">
+				<h1>Aggiungi nuova Foto:</h1>
+			</th:block>
+			<th:block th:if="${action.equals('edit')}">
+				<h1>Modifica Foto:</h1>
+			</th:block>
+		</div>
+
+		<form method="POST" th:object="${foto}">
+			<div class="mb-3">
+
+				<label for="title" class="form-label">Titolo</label>
+				<input type="text" class="form-control" id="title" placeholder="Titolo della foto..."
+					th:field="*{title}">
+				<div th:if="${#fields.hasErrors('title')}" class="text-primary">
+					<ul>
+						<li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="description" class="form-label">Descrizione</label>
+				<textarea type="text" class="form-control" id="description" rows="3"
+					placeholder="Foto di un paesaggio..." th:field="*{description}"></textarea>
+				<div th:if="${#fields.hasErrors('description')}" class="text-primary">
+					<ul>
+						<li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="url" class="form-label">Link foto</label>
+				<input type="text" class="form-control" id="url" placeholder="https://link/immagine.it/..."
+					th:field="*{url}">
+				<div th:if="${#fields.hasErrors('url')}" class="text-primary">
+					<ul>
+						<li th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
+					</ul>
+				</div>
+			</div>
+			</div>
+
+			<div class="button-container">
+				<th:block th:if="${action.equals('create')}">
+					<button class="btn btn-primary">Aggiungi</button>
+				</th:block>
+				<th:block th:if="${action.equals('edit')}">
+					<button class="btn btn-primary">Aggiorna Foto</button>
+				</th:block>
+			</div>
+		</form>
+	</div>
+
+</body>
+
+</html>

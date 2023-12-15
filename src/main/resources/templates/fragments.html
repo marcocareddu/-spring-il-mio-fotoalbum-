@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<head th:fragment="head">
+		<meta charset="ISO-8859-1">
+		<title>Pizzeria</title>
+
+		<!-- Font Awesome -->
+		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css'
+			integrity='sha512-tx5+1LWHez1QiaXlAyDwzdBTfDjX07GMapQoFTS74wkcPMsI3So0KYmFe6EHZjI8+eSG0ljBlAQc3PQ5BTaZtQ=='
+			crossorigin='anonymous'>
+
+		<!-- Bootstrap -->
+		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+
+		<!-- CSS -->
+		<link rel="stylesheet" th:href="@{/css/application.css}">
+	</head>
+
+	<!-- Button  -->
+	<a th:fragment="button-detail(link, text)" th:href="${link}" th:text="${text}" class="btn btn-primary">
+	</a>
+
+	<!-- multiple Cards -->
+	<div th:fragment="card(list)" th:each="element : ${list}" th:object="${element}" class="card col m-3 indexCard"
+		style="width: 18rem; padding: 0;">
+		<img th:src="@{*{url}}" class="card-img-top multi-img" th:alt="*{title}">
+		<div class="card-body d-flex flex-column">
+			<h5 class="card-title"><i class="fa-solid fa-camera-retro text-primary"></i> [[*{title}]]</h5>
+			<p class="card-text flex-grow-1">[[*{description}]]</p>
+			<div class="mt-auto d-flex justify-content-center">
+				<div class="me-2">
+					<a th:replace="~{fragments :: button-detail(@{'/detail/' + ${element.id}}, 'Dettaglio')}"></a>
+				</div>
+				<div class="me-2">
+					<a th:replace="~{fragments :: button-detail(@{'/edit/' + ${element.id}}, 'Modifica')}"></a>
+				</div>
+				<form  th:action="@{'/delete/' + ${element.id}}"
+					method="POST">
+					<button class="btn btn-primary">Elimina</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Single Card -->
+	<div th:fragment="singleCard(element)" th:object="${element}" class="card col-6 mt-5 p-0">
+		<img th:src="@{*{url}}" class="card-img-top img-fluid" th:alt="*{title}">
+		<div class="card-body text-center">
+			<h4 class="card-title"><i class="fa-solid fa-camera-retro text-primary"></i> [[*{title}]]</h4>
+			<p class="card-text">[[*{description}]]</p>
+			<!-- <h6 class="text-primary">Visibilità [[*{visible}]]</h6> -->
+
+			<!-- Single Card Buttons-->
+			<div class="d-flex justify-content-center">
+				<div class="m-2"><a class="me-2"
+						th:replace="~{fragments :: button-detail(@{'/'}, 'Torna alla lista')}"></a></div>
+				<div class="me-2"><a
+						th:replace="~{fragments :: button-detail(@{'/edit/' + ${element.id}}, 'Modifica')}"></a></div>
+				<div class="me-2">
+					<form  th:action="@{'/delete/' + ${element.id}}" method="POST">
+						<button class="btn btn-primary">Elimina</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Header -->
+	<header class="position-fixed shadow d-flex align-items-center" th:fragment="header">
+		<div class="container justify-content-between d-flex align-items-center">
+			<a th:href="@{/}">
+				<h1><i class="fa-solid fa-camera-retro text-primary"></i></h1>
+			</a>
+			<div class="d-flex">
+				<div class="me-1">
+					<a th:insert="~{fragments :: button-detail(@{'/create'}, 'Crea nuova foto')}"></a>
+				</div>
+				<a 
+					th:insert="~{fragments :: button-detail(@{'/login'}, 'Login')}"></a>
+				<a 
+					th:insert="~{fragments :: button-detail(@{'/logout'}, 'Logout')}"></a>
+			</div>
+		</div>
+	</header>
+</body>
+</html>
