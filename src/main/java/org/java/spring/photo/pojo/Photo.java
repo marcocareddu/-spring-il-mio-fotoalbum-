@@ -1,9 +1,13 @@
 package org.java.spring.photo.pojo;
 
+import org.hibernate.validator.constraints.Length;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 public class Photo {
@@ -12,9 +16,17 @@ public class Photo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Length(min = 3, message = "Devi inserire almeno 3 caratteri.")
+	@Length(max = 20, message = "Il nome deve essere lungo massimo 20 caratteri.")
 	private String title;
+	
+	@Column(columnDefinition = "TEXT")
+	@Length(min = 3, message = "Devi inserire almeno 3 caratteri.")
 	private String description;
+	
+	@Length(min = 10, message = "Il link deve essere di almeno 10 caratteri.")
 	private String url;
+	
 	private boolean visible;
 	
 //  Constructors
