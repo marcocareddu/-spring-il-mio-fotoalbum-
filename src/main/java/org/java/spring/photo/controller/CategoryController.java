@@ -63,7 +63,7 @@ public class CategoryController {
 		System.out.println("Categoria " + category.getName() + " modificata");
 		
 		categoryService.save(category);
-		return "redirect:/";
+		return "redirect:/index-categories";
 	}
 	
 	

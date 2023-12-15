@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments :: head}"></head>
+
+<body>
+	<header th:insert="~{fragments :: header}"></header>
+
+	<div class="container">
+		<div class="title d-flex justify-content-center my-3">
+			<h1><i class="fa-solid fa-message"></i> Messaggi:</h1>
+		</div>
+
+		<!-- If list is empty -->
+		<th:block th:if="${list.isEmpty()}">
+			<div class="title d-flex justify-content-center mt-5">
+				<h1>Non è presente nessun messaggio</h1>
+			</div>
+		</th:block>
+
+		<!-- If list contains elements -->
+		<th:block th:if="${!list.isEmpty()}">
+			<div class="card-container d-flex justify-content-center">
+				<table th:replace="~{fragments :: messageTable(${list})}"></table>
+			</div>
+		</th:block>
+	</div>
+</body>
+
+</html>

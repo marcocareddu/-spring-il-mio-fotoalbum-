@@ -15,6 +15,6 @@ public class MessageController {
 	@PostMapping("/messages/delete/{id}")
 	public String deleteMessage(@PathVariable int id) {
 		messageService.deleteById(id);
-		return "redirect:/indexMessages";
+		return "redirect:/index-messages";
 	}
 }

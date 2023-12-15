@@ -1,9 +1,12 @@
 package org.java.spring.photo.controller;
 
 import java.util.List;
+
+import org.java.spring.photo.message.pojo.Message;
 import org.java.spring.photo.pojo.Category;
 import org.java.spring.photo.pojo.Photo;
 import org.java.spring.photo.services.CategoryService;
+import org.java.spring.photo.services.MessageService;
 import org.java.spring.photo.services.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +27,9 @@ public class PhotoController {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	@GetMapping
 	public String getPhotos(Model model, @RequestParam(required = false) String searched) {
@@ -105,5 +111,14 @@ public class PhotoController {
 		model.addAttribute("list", categories);
 		
 		return "IndexCategories";
+	}
+	
+	@GetMapping("/index-messages")
+	public String getMessages(Model model) {
+		
+		List<Message> messages = messageService.findAll();
+		model.addAttribute("list", messages);
+
+		return "IndexMessages";
 	}
 }

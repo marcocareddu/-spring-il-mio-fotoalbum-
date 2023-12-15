@@ -43,19 +43,34 @@ public class SpringIlMioFotoalbumApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		
+//		Categories
 		Category paesaggio = new Category("paesaggio");
 		Category natura = new Category("natura");
 		Category acqua = new Category("acqua");
 		Category city = new Category("città");
-
-		Message messaggio = new Message("indirizzo.mail.it", "Ciao mi piacciono le tue foto");
-		messageService.save(messaggio);
-				
 		categoryService.save(natura);
 		categoryService.save(paesaggio);
 		categoryService.save(acqua);
 		categoryService.save(city);
 		
+		
+		
+//		Messages
+		Message messaggio1 = new Message("indirizzo.mail.it", "Ciao mi piacciono le tue foto");
+		Message messaggio2 = new Message("indirizzo.mail.com", "Che bella foto!");
+		Message messaggio3 = new Message("indirizzo.mail.org", "WOW! GREAT! AWESOME!");
+		Message messaggio4 = new Message("indirizzo.mail.eu", "Ciao potrei acquistare una tua foto?");
+		Message messaggio5 = new Message("indirizzo.mail.io", "Bella foto!");
+		messageService.save(messaggio1);
+		messageService.save(messaggio2);				
+		messageService.save(messaggio3);
+		messageService.save(messaggio4);
+		messageService.save(messaggio5);
+		
+		
+		
+//		Photos
 		photoService.save(new Photo("Giardino", "Foto di un giardino", "https://www.dubai.it/wp-content/uploads/sites/32/dubai-miracle-garden.jpg", true, natura));
 		photoService.save(new Photo("Montagna", "Foto di una montagna", "https://www.liveinup.it/thumbs/luoghi/esperienze-in-montagna-copertina.webp", true, natura, paesaggio));
 		photoService.save(new Photo("Spiaggia", "Foto di una spiaggia", "https://staticfanpage.akamaized.net/wp-content/uploads/sites/33/2023/05/spiaggia-villasimius.jpg", true, natura, paesaggio));
@@ -69,6 +84,9 @@ public class SpringIlMioFotoalbumApplication implements CommandLineRunner {
 		
 		List<Photo> photos = photoService.findAll();
 		
+		
+		
+//		Users
 		Role user = new Role("USER");
 		Role admin = new Role("ADMIN");
 		Role superadmin = new Role("SUPERADMIN");

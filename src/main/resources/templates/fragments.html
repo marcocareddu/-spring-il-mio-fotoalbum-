@@ -20,8 +20,7 @@
 	</head>
 
 	<!-- Button  -->
-	<a th:fragment="button-detail(link, text)" th:href="${link}" th:text="${text}" class="btn btn-primary">
-	</a>
+	<a th:fragment="button-detail(link, text)" th:href="${link}" th:text="${text}" class="btn btn-primary"></a>
 
 	<!-- multiple Cards -->
 	<div th:fragment="card(list)" th:each="element : ${list}" th:object="${element}" class="card col m-3 indexCard"
@@ -38,13 +37,36 @@
 					<a sec:authorize="hasAuthority('ADMIN')"
 						th:replace="~{fragments :: button-detail(@{'/edit/' + ${element.id}}, 'Modifica')}"></a>
 				</div>
-				<form sec:authorize="hasAuthority('ADMIN')" th:action="@{'/delete/' + ${element.id}}"
-					method="POST">
+				<form sec:authorize="hasAuthority('ADMIN')" th:action="@{'/delete/' + ${element.id}}" method="POST">
 					<button class="btn btn-primary">Elimina</button>
 				</form>
 			</div>
 		</div>
 	</div>
+
+	<!-- Message table -->
+	<table th:fragment="messageTable(list)" class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Mittente</th>
+				<th scope="col">Messaggio</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="element : ${list}" th:object="${element}">
+				<th scope="row">[[*{id}]]</th>
+				<td>[[*{email}]]</td>
+				<td>[[*{message}]]</td>
+				<td>
+					<form th:action="@{'/messages/delete/' + ${element.id}}" method="POST">
+						<button class="btn btn-primary">Elimina</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
 	<!-- Single Card -->
 	<div th:fragment="singleCard(element)" th:object="${element}" class="card col-6 mt-5 p-0">
@@ -54,16 +76,15 @@
 			<p class="card-text">[[*{description}]]</p>
 			<!-- <h6 class="text-primary">Visibilità [[*{visible}]]</h6> -->
 
-						<!-- Categories -->
-						<div>
-							<h6 class="card-title mt-4">Categorie</h6>
-							<span th:each="element : *{categories}" class="card-text my-2"> [[${element.name}]] </span>
-						</div>
+			<!-- Categories -->
+			<div>
+				<h6 class="card-title mt-4">Categorie</h6>
+				<span th:each="element : *{categories}" class="card-text my-2"> [[${element.name}]] </span>
+			</div>
 
 			<!-- Single Card Buttons-->
 			<div class="d-flex justify-content-center">
-				<div class="me-2"><a
-						th:replace="~{fragments :: button-detail(@{'/'}, 'Torna alla lista')}"></a></div>
+				<div class="me-2"><a th:replace="~{fragments :: button-detail(@{'/'}, 'Torna alla lista')}"></a></div>
 				<div sec:authorize="hasAuthority('ADMIN')" class="me-2"><a
 						th:replace="~{fragments :: button-detail(@{'/edit/' + ${element.id}}, 'Modifica')}"></a></div>
 				<div sec:authorize="hasAuthority('ADMIN')" class="me-2">
@@ -85,6 +106,7 @@
 				<div sec:authorize="hasAuthority('ADMIN')" class="me-1">
 					<a th:insert="~{fragments :: button-detail(@{'/create'}, 'Crea nuova foto')}"></a>
 					<a th:insert="~{fragments :: button-detail(@{'/index-categories'}, 'Categorie')}"></a>
+					<a th:insert="~{fragments :: button-detail(@{'/index-messages'}, 'Messaggi')}"></a>
 				</div>
 				<a th:if="${#authorization.expression('isAnonymous()')}"
 					th:insert="~{fragments :: button-detail(@{'/login'}, 'Login')}"></a>
@@ -94,4 +116,5 @@
 		</div>
 	</header>
 </body>
+
 </html>
