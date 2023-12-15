@@ -5,9 +5,11 @@ import java.util.List;
 import org.java.spring.photo.auth.Role;
 import org.java.spring.photo.auth.User;
 import org.java.spring.photo.auth.config.AuthConfiguration;
+import org.java.spring.photo.message.pojo.Message;
 import org.java.spring.photo.pojo.Category;
 import org.java.spring.photo.pojo.Photo;
 import org.java.spring.photo.services.CategoryService;
+import org.java.spring.photo.services.MessageService;
 import org.java.spring.photo.services.PhotoService;
 import org.java.spring.photo.services.RoleService;
 import org.java.spring.photo.services.UserService;
@@ -24,6 +26,9 @@ public class SpringIlMioFotoalbumApplication implements CommandLineRunner {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	@Autowired
 	private RoleService roleService;
@@ -43,11 +48,13 @@ public class SpringIlMioFotoalbumApplication implements CommandLineRunner {
 		Category acqua = new Category("acqua");
 		Category city = new Category("città");
 
+		Message messaggio = new Message("indirizzo.mail.it", "Ciao mi piacciono le tue foto");
+		messageService.save(messaggio);
+				
 		categoryService.save(natura);
 		categoryService.save(paesaggio);
 		categoryService.save(acqua);
 		categoryService.save(city);
-		
 		
 		photoService.save(new Photo("Giardino", "Foto di un giardino", "https://www.dubai.it/wp-content/uploads/sites/32/dubai-miracle-garden.jpg", true, natura));
 		photoService.save(new Photo("Montagna", "Foto di una montagna", "https://www.liveinup.it/thumbs/luoghi/esperienze-in-montagna-copertina.webp", true, natura, paesaggio));
