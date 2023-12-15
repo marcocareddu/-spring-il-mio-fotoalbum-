@@ -1,7 +1,6 @@
 package org.java.spring.photo.controller;
 
 import java.util.List;
-
 import org.java.spring.photo.pojo.Photo;
 import org.java.spring.photo.services.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import jakarta.validation.Valid;
 
 @Controller
