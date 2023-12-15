@@ -1,7 +1,9 @@
 package org.java.spring.photo.controller;
 
 import java.util.List;
+import org.java.spring.photo.pojo.Category;
 import org.java.spring.photo.pojo.Photo;
+import org.java.spring.photo.services.CategoryService;
 import org.java.spring.photo.services.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,9 @@ public class PhotoController {
 
 	@Autowired
 	private PhotoService photoService;
+	
+	@Autowired
+	private CategoryService categoryService;
 	
 	@GetMapping
 	public String getPhotos(Model model, @RequestParam(required = false) String searched) {
@@ -38,8 +43,10 @@ public class PhotoController {
 
 	@GetMapping("/create")
 	public String create(Model model) {
+		List<Category> categories = categoryService.findAll();
 		model.addAttribute("photo", new Photo());
 		model.addAttribute("action", "create");
+		model.addAttribute("categories", categories);
 		
 		return "form";
 	}
@@ -61,9 +68,11 @@ public class PhotoController {
 	@GetMapping("/edit/{id}")
 	public String editPhoto(Model model, @PathVariable int id) {
 		
+		List<Category> categories = categoryService.findAll();
 		Photo photo = photoService.findById(id);
 		model.addAttribute("photo", photo);
 		model.addAttribute("action", "edit");
+		model.addAttribute("categories", categories);
 		
 		return "form";
 	}
