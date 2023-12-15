@@ -25,8 +25,10 @@ public class AuthConfiguration {
 			.requestMatchers("/edit/**").hasAnyAuthority("ADMIN", "SUPERADMIN")
 			.requestMatchers("/delete/**").hasAnyAuthority("ADMIN", "SUPERADMIN")
 			.requestMatchers("/promos/**").hasAnyAuthority("ADMIN", "SUPERADMIN")
-			.requestMatchers("/ingredients/**").hasAnyAuthority("ADMIN", "SUPERADMIN")
-			.requestMatchers("/index-ingredients/**").hasAnyAuthority("ADMIN", "SUPERADMIN")
+			.requestMatchers("/categories/**").hasAnyAuthority("ADMIN", "SUPERADMIN")
+			.requestMatchers("/messages/**").hasAnyAuthority("ADMIN", "SUPERADMIN")
+			.requestMatchers("/index-categories/**").hasAnyAuthority("ADMIN", "SUPERADMIN")
+			.requestMatchers("/index-messages/**").hasAnyAuthority("ADMIN", "SUPERADMIN")
 			.requestMatchers("/**").permitAll()
 			.and().formLogin()
 			.and().logout();
