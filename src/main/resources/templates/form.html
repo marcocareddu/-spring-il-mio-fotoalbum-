@@ -50,9 +50,34 @@
 					</ul>
 				</div>
 			</div>
-			</div>
 
-			<div class="button-container">
+			<!-- Categories -->
+			<div class="checkboxes">
+				<h5>Categorie</h5>
+
+				<div 
+				th:each="element : ${categories}" 
+				th:object="${element}" 
+				class="form-check"
+				>
+				
+					<input 
+					th:field="${photo.categories}" 
+					class="form-check-input" 
+					type="checkbox" 
+					th:value="*{id}"
+					th:id="*{id}"
+					>
+						
+					<label 
+					th:for="*{id}"
+					class="form-check-label" 
+					>
+					[[${element.name}]]
+					</label>
+				</div>
+				
+							<div class="button-container">
 				<th:block th:if="${action.equals('create')}">
 					<button class="btn btn-primary">Aggiungi</button>
 				</th:block>
@@ -60,6 +85,9 @@
 					<button class="btn btn-primary">Aggiorna Foto</button>
 				</th:block>
 			</div>
+			</div>
+
+
 		</form>
 	</div>
 </body>

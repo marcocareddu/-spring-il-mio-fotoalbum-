@@ -54,6 +54,12 @@
 			<p class="card-text">[[*{description}]]</p>
 			<!-- <h6 class="text-primary">Visibilità [[*{visible}]]</h6> -->
 
+						<!-- Categories -->
+						<div>
+							<h6 class="card-title mt-4">Categorie</h6>
+							<span th:each="element : *{categories}" class="card-text my-2"> [[${element.name}]] </span>
+						</div>
+
 			<!-- Single Card Buttons-->
 			<div class="d-flex justify-content-center">
 				<div class="m-2"><a class="me-2"
