@@ -28,11 +28,14 @@
 			class="card-container d-flex align-items-center justify-content-between my-1" 
 			>
 				<span th:text="*{name}"></span>
+				<div class="d-flex">
 					<form sec:authorize="hasAuthority('ADMIN')" th:action="@{'/categories/delete/' + *{id}}" method="POST">
-						<button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+						<button class="btn btn-danger me-2"><i class="fa-solid fa-trash"></i></button>
 					</form>
-					<div sec:authorize="hasAuthority('ADMIN')" class="me-2"><a
-						th:replace="~{fragments :: button-detail(@{'/categories/edit/' + *{id}}, 'Modifica')}"></a></div>
+					<div sec:authorize="hasAuthority('ADMIN')" class="me-2"><a class="btn btn-primary" th:href="@{/categories/edit/{id}(id=*{id})}">
+						<i class="fa-solid fa-pencil"></i>
+					</a></div>
+					</div>
 			</div>
 			</div>
 		</th:block>
