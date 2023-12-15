@@ -1,7 +1,6 @@
 package org.java.spring.photo.api;
 
 import java.util.List;
-
 import org.java.spring.photo.pojo.Photo;
 import org.java.spring.photo.services.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
