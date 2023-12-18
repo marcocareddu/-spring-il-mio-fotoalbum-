@@ -16,9 +16,11 @@
 			</th:block>
 		</div>
 
+		<!-- Form -->
 		<form method="POST" th:object="${photo}">
 			<div class="mb-3">
 
+				<!-- Title -->
 				<label for="title" class="form-label">Titolo</label>
 				<input type="text" class="form-control" id="title" placeholder="Titolo della foto..."
 					th:field="*{title}">
@@ -29,6 +31,7 @@
 				</div>
 			</div>
 
+			<!-- Description -->
 			<div class="mb-3">
 				<label for="description" class="form-label">Descrizione</label>
 				<textarea type="text" class="form-control" id="description" rows="3"
@@ -40,6 +43,7 @@
 				</div>
 			</div>
 
+			<!-- Img URL -->
 			<div class="mb-3">
 				<label for="url" class="form-label">Link foto</label>
 				<input type="text" class="form-control" id="url" placeholder="https://link/immagine.it/..."
@@ -55,29 +59,25 @@
 			<div class="checkboxes">
 				<h5>Categorie</h5>
 
-				<div 
-				th:each="element : ${categories}" 
-				th:object="${element}" 
-				class="form-check"
-				>
-				
-					<input 
-					th:field="${photo.categories}" 
-					class="form-check-input" 
-					type="checkbox" 
-					th:value="*{id}"
-					th:id="*{id}"
-					>
-						
-					<label 
-					th:for="*{id}"
-					class="form-check-label" 
-					>
-					[[${element.name}]]
+				<div th:each="element : ${categories}" th:object="${element}" class="form-check">
+
+					<input th:field="${photo.categories}" class="form-check-input" type="checkbox" th:value="*{id}"
+						th:id="*{id}">
+
+					<label th:for="*{id}" class="form-check-label">
+						[[${element.name}]]
 					</label>
 				</div>
 				
-							<div class="button-container">
+				<!-- Visibility -->
+				<div class="form-check form-switch">
+					<input class="form-check-input" type="checkbox" role="switch" id="visible" th:field="*{visible}" th:checked="*{visible}">
+					<label class="form-check-label" for="visible">Pubblico</label>
+				</div>
+			</div>
+
+			<!-- Buttons -->
+			<div class="button-container">
 				<th:block th:if="${action.equals('create')}">
 					<button class="btn btn-primary">Aggiungi</button>
 				</th:block>
@@ -85,10 +85,8 @@
 					<button class="btn btn-primary">Aggiorna Foto</button>
 				</th:block>
 			</div>
-			</div>
-
-
 		</form>
 	</div>
 </body>
+
 </html>
