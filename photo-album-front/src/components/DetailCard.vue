@@ -2,6 +2,12 @@
 import { defineProps, defineEmits } from 'vue';
 import axios from 'axios';
 
+// Consts and vars
+const newMessage = {
+	email: '',
+	message: '',
+};
+
 // Props
 const props = defineProps({
 	photo: {
@@ -10,21 +16,13 @@ const props = defineProps({
 	}
 });
 
-console.log(props.photo);
-
 // Emits
 const emits = defineEmits(['listphoto']);
 
-// Consts and vars
-const newMessage = {
-	email: '',
-	message: '',
-};
-
 const sendMessage = async () => {
-        const response = await axios.post(
-            'http://localhost:8080/api/v1.0/messages', newMessage);
-		console.log(response);
+    const response = await axios.post(
+        'http://localhost:8080/api/v1.0/messages', newMessage);
+	emits('listphoto', true)
 };
 </script>
 
@@ -56,7 +54,6 @@ const sendMessage = async () => {
 				<div class="d-flex justify-content-center mb-5">
 					<h1> Invia un messaggio</h1>
 				</div>
-
 
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="email">Email</span>
