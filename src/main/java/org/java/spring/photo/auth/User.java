@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.java.spring.photo.message.pojo.Message;
 import org.java.spring.photo.pojo.Photo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -21,10 +27,10 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int id;
-	
+
 	private String username;
 	private String password;
-	
+
 //	Constructors
 	public User(){}
 	public User(String Username, String password, Role... roles) {
@@ -36,21 +42,29 @@ public class User implements UserDetails {
 //	Relations
 	@ManyToMany
 	private List<Role> roles;
-	
+
 	@OneToMany(mappedBy = "user")
     private List<Photo> photos = new ArrayList<>();
-	
+
+    @OneToMany(mappedBy = "user")
+    private List<Message> messages = new ArrayList<>();
+
 //	Getters & Setters
+    public List<Message> getMessages() {return messages;}
+    public void setMessages(List<Message> messages) {this.messages = messages;}
 	public int getId() {return id;}
 	public void setId(int id) {this.id = id;}
 	public String getUsername() {return username;}
 	public void setUsername(String username) {this.username = username;}
 	public String getPassword() {return password;}
 	public void setPassword(String password) {this.password = password;}
+	
+	@JsonIgnore
 	private void setRoles(Role... roles) {setRoles(List.of(roles));}
+	
 	public List<Role> getRoles() {return roles;}
 	public void setRoles(List<Role> roles) {this.roles = roles;}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return 
@@ -58,7 +72,7 @@ public class User implements UserDetails {
 				.stream()
 				.map(r -> new SimpleGrantedAuthority(r.getName()))
 				.toList();
-		}
+}
 	@Override
 	public boolean isAccountNonExpired() {return true;}
 	@Override
@@ -67,5 +81,4 @@ public class User implements UserDetails {
 	public boolean isCredentialsNonExpired() {return true;}
 	@Override
 	public boolean isEnabled() {return true;}
-	
 }

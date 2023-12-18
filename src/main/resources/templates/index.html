@@ -7,33 +7,47 @@
 	<header th:insert="~{fragments :: header}"></header>
 
 	<div class="container">
-		<div class="title d-flex justify-content-center my-3">
-			<h1><i class="fa-solid fa-camera-retro text-primary"></i> Le foto:</h1>
-		</div>
 
-		<!-- Search bar -->
-		<div class="d-flex justify-content-center">
-			<form>
-				<div class="input-group my-3 search-container">
-					<input type="text" name="searched" class="form-control" placeholder="Ricerca una foto"
-						th:value="${searched}">
-				</div>
-			</form>
-		</div>
-
-		<!-- If list is empty -->
-		<th:block th:if="${list.isEmpty()}">
-			<div class="title d-flex justify-content-center mt-5">
-				<h1>Non è presente nessuna foto</h1>
+		<th:block th:if="${#authorization.expression('isAuthenticated()')}">
+			<div class="title d-flex justify-content-center my-3">
+				<h1><i class="fa-solid fa-camera-retro text-primary"></i> Le foto:</h1>
 			</div>
+
+			<!-- Search bar -->
+			<div class="d-flex justify-content-center">
+				<form>
+					<div class="input-group my-3 search-container">
+						<input type="text" name="searched" class="form-control" placeholder="Ricerca una foto"
+							th:value="${searched}">
+					</div>
+				</form>
+			</div>
+
+			<!-- If list is empty -->
+			<th:block th:if="${list.isEmpty()}">
+				<div class="title d-flex justify-content-center mt-5">
+					<h1>Non è presente nessuna foto</h1>
+				</div>
+			</th:block>
+
+			<!-- If list contains elements -->
+			<th:block th:if="${!list.isEmpty()}">
+				<div class="card-container d-flex row row-cols-4 justify-content-center">
+					<div th:replace="~{fragments :: card(${list})}"></div>
+				</div>
+			</th:block>
 		</th:block>
 
-		<!-- If list contains elements -->
-		<th:block th:if="${!list.isEmpty()}">
-			<div class="card-container d-flex row row-cols-4 justify-content-center">
-				<div th:replace="~{fragments :: card(${list})}"></div>
+		<th:block th:unless="${#authorization.expression('isAuthenticated()')}">
+			<div class="d-flex justify-content-center align-items-center mt-5">
+				<div>
+					<h1>Non sei loggato!</h1>
+					<h4>Nuovo utente? <a th:insert="~{fragments :: button-detail(@{'/signup'}, 'Registrati')}"></a></h4>
+					<h4>Oppure <a th:insert="~{fragments :: button-detail(@{'/login'}, 'Accedi')}"></a> </h4>
+				</div>
 			</div>
 		</th:block>
 	</div>
 </body>
+
 </html>

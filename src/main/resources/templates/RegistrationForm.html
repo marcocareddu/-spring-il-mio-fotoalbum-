@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments :: head}"></head>
+
+<body>
+	<header th:insert="~{fragments :: header}"></header>
+
+	<div class="container">
+		<div class="title d-flex justify-content-center">
+			<h1>Registrati:</h1>
+		</div>
+
+		<form method="POST" th:object="${user}">
+			<div class="mb-3">
+
+				<div class="input-group mb-3">
+					<label for="username" class="form-label">Username</label>
+					<input th:field="${user.username}" id="username" type="text" class="form-control" placeholder="Username">
+					<div th:if="${#fields.hasErrors('username')}" class="text-primary">
+						<ul>
+							<li th:each="err : ${#fields.errors('username')}" th:text="${err}"></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="input-group mb-3">
+					<label for="password" class="form-label">Password</label>
+					<input th:field="${user.password}" type="password" for="password" class="form-control"
+						placeholder="Password">
+					<div th:if="${#fields.hasErrors('password')}" class="text-primary">
+						<ul>
+							<li th:each="err : ${#fields.errors('password')}" th:text="${err}"></li>
+						</ul>
+					</div>
+				</div>
+
+				<button class="btn btn-danger">Registrati</button>
+			</div>
+		</form>
+	</div>
+
+</body>
+
+</html>

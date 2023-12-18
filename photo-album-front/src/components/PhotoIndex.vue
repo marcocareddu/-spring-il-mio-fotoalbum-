@@ -12,13 +12,11 @@ const singlephoto = ref({});
 const handleSinglephoto = (photo) => {
 	list.value = false;
 	singlephoto.value = photo;
-	showForm.value = false;
 };
 
 const handleListphoto = (listphoto) => {
 	list.value = true;
 	singlephoto.value = null;
-	showForm.value = false;
 };
 
 const fetchFilteredPhotos = async (searched) => {
@@ -66,7 +64,7 @@ onMounted(async () => {
 		<div class="card-container d-flex row row-cols-4 justify-content-center">
 			<IndexCard v-if="list" v-for="photo in photos" :key="photo.id" :photo="photo"
 				@single-photo="handleSinglephoto" />
-			<DetailCard v-if="!list && !showForm" :photo="singlephoto" @listphoto="handleListphoto" />
+			<DetailCard v-if="!list" :photo="singlephoto" @listphoto="handleListphoto" />
 		</div>
 	</div>
 </template>

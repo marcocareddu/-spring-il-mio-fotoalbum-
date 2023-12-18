@@ -21,7 +21,9 @@ public class MessageRestController {
 	
 	@PostMapping
 	public ResponseEntity<Message> create(@RequestBody Message message) {
+		
 		messageService.save(message);
+		
 		return new ResponseEntity<>(message, HttpStatus.OK);
 	}
 }

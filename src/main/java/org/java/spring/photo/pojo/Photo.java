@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.hibernate.validator.constraints.Length;
 import org.java.spring.photo.auth.User;
+import org.java.spring.photo.message.pojo.Message;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,46 +21,45 @@ public class Photo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Length(min = 3, message = "Devi inserire almeno 3 caratteri.")
 	@Length(max = 20, message = "Il nome deve essere lungo massimo 20 caratteri.")
 	private String title;
-	
+
 	@Column(columnDefinition = "TEXT")
 	@Length(min = 3, message = "Devi inserire almeno 3 caratteri.")
 	private String description;
-	
+
 	@Length(min = 10, message = "Il link deve essere di almeno 10 caratteri.")
 	private String url;
-	
+
 	private boolean visible;
-	
+
 //	DB Relations
 	@ManyToMany
 	private List<Category> categories;
-	
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-	
+
 	public List<Category> getCategories() {
 		return categories;
 	}
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
-	
+
 //  Constructors
-	public Photo() {
-	}
-	public Photo(String title, String description, String url, boolean visible, Category... categories ) {
+	public Photo() {}
+	public Photo(String title, String description, String url, boolean visible, Category... categories) {
 		setTitle(title);
 		setDescription(description);
 		setUrl(url);
 		setVisible(visible);
 		setCategories(Arrays.asList(categories));
 	}
-	
+
 //	Getters & Setters
 	public Integer getId() {
 		return id;
