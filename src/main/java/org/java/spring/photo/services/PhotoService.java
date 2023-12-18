@@ -15,10 +15,13 @@ public class PhotoService {
 	public List<Photo> findAll() {
 		return photoRepository.findAll();
 	}
+	public List<Photo> findAllVisible() {
+		return photoRepository.findByVisibleIsTrue();
+	}
 	public Photo findById(int id) {
 		return photoRepository.findById(id).get();
 	}
-	public List<Photo> findByName(String searched) {
+	public List<Photo> findByTitle(String searched) {
 		return photoRepository.findByTitleContainingOrDescriptionContainingIgnoreCase(searched, searched);
 	}
 	public void save(Photo photo) {

@@ -33,7 +33,7 @@ public class PhotoController {
 	
 	@GetMapping
 	public String getPhotos(Model model, @RequestParam(required = false) String searched) {
-		List<Photo> photos = searched == null ? photoService.findAll() : photoService.findByName(searched);
+		List<Photo> photos = searched == null ? photoService.findAll() : photoService.findByTitle(searched);
 		model.addAttribute("list", photos);
 		model.addAttribute("searched", searched == null ? "" : searched);
 		return "index";

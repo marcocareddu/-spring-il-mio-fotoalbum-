@@ -35,7 +35,7 @@ public class AuthConfiguration {
 			
 			return http.build();
 	 }
-	
+
 	 @Bean
 	 UserDetailsService userDetailsService() {
 	 return new UserService();

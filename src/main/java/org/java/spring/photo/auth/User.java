@@ -1,7 +1,10 @@
 package org.java.spring.photo.auth;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import org.java.spring.photo.pojo.Photo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User implements UserDetails {
@@ -32,6 +36,9 @@ public class User implements UserDetails {
 //	Relations
 	@ManyToMany
 	private List<Role> roles;
+	
+	@OneToMany(mappedBy = "user")
+    private List<Photo> photos = new ArrayList<>();
 	
 //	Getters & Setters
 	public int getId() {return id;}

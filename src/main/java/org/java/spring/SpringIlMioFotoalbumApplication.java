@@ -71,10 +71,10 @@ public class SpringIlMioFotoalbumApplication implements CommandLineRunner {
 		
 		
 //		Photos
-		photoService.save(new Photo("Giardino", "Foto di un giardino", "https://www.dubai.it/wp-content/uploads/sites/32/dubai-miracle-garden.jpg", true, natura));
-		photoService.save(new Photo("Montagna", "Foto di una montagna", "https://www.liveinup.it/thumbs/luoghi/esperienze-in-montagna-copertina.webp", true, natura, paesaggio));
-		photoService.save(new Photo("Spiaggia", "Foto di una spiaggia", "https://staticfanpage.akamaized.net/wp-content/uploads/sites/33/2023/05/spiaggia-villasimius.jpg", true, natura, paesaggio));
-		photoService.save(new Photo("Città", "Foto di una città", "https://i0.wp.com/osservatorioglobalizzazione.it/wp-content/uploads/2020/05/pechino1.jpg?w=1080&ssl=1", true, city));
+		photoService.save(new Photo("Giardino", "Foto di un giardino", "https://www.dubai.it/wp-content/uploads/sites/32/dubai-miracle-garden.jpg", false, natura));
+		photoService.save(new Photo("Montagna", "Foto di una montagna", "https://www.liveinup.it/thumbs/luoghi/esperienze-in-montagna-copertina.webp", false, natura, paesaggio));
+		photoService.save(new Photo("Spiaggia", "Foto di una spiaggia", "https://staticfanpage.akamaized.net/wp-content/uploads/sites/33/2023/05/spiaggia-villasimius.jpg", false, natura, paesaggio));
+		photoService.save(new Photo("Città", "Foto di una città", "https://i0.wp.com/osservatorioglobalizzazione.it/wp-content/uploads/2020/05/pechino1.jpg?w=1080&ssl=1", false, city));
 		photoService.save(new Photo("Foresta", "Foto di una foresta", "https://staticfanpage.akamaized.net/wp-content/uploads/sites/12/2018/07/640px-es2110009-gorbea_hayedo_de_otxarreta_aga7421.jpg", true, natura, paesaggio));
 		photoService.save(new Photo("Deserto", "Foto di un deserto", "https://www.skuola.net/news_foto/2018/deserto-sahara-descrizione.jpg", true, natura, paesaggio));
 		photoService.save(new Photo("Fiume", "Foto di un fiume", "https://www.wildecobeach.com/cdn/shop/articles/Reka_Soca_175c8d63-3feb-49c4-b602-9886e9dc4fb9_1000x.jpg?v=1587734159", true, natura, paesaggio, acqua));

@@ -26,28 +26,21 @@ public class PhotoRestController {
 	private PhotoService photoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Photo>> getIndex(@RequestParam(required = false) String searched) {
-		
-		List<Photo> photos = searched == null ? photoService.findAll() : photoService.findByName(searched);
-		
+	public ResponseEntity<List<Photo>> getIndex() {
+		List<Photo> photos =  photoService.findAllVisible();
 		return new ResponseEntity<>(photos, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("{id}")
 	public ResponseEntity<Photo> getPhoto(@PathVariable int id) {
-		
 		Photo photo = photoService.findById(id);
-		
 		if(photo == null) return new ResponseEntity<>(photo, HttpStatus.OK);
-		
 		return new ResponseEntity<>(photo, HttpStatus.OK);
 	}
 	
 	@PostMapping
 	public ResponseEntity<Photo> create(@RequestBody Photo photo) {
-
 		photoService.save(photo);
-		
 		return new ResponseEntity<>(photo, HttpStatus.OK);
 	}
 	
