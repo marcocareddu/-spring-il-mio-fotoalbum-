@@ -21,10 +21,23 @@ const handleListphoto = (listphoto) => {
 	showForm.value = false;
 };
 
+const fetchFilteredPhotos = async (searched) => {
+	const data = await axios.get(
+		`http://localhost:8080/api/v1.0/photos?searched=${searched.trim()}`
+	);
+	photos.value = data.data;
+};
+
+const handleSearch = (e) => {
+  const searchedValue = e.target.value;
+  fetchFilteredPhotos(searchedValue);
+};
+
 onMounted(async () => {
 	const data = await axios.get("http://localhost:8080/api/v1.0/photos");
 	photos.value = data.data;
 });
+
 </script>
 
 <template>
@@ -39,14 +52,14 @@ onMounted(async () => {
 		<div class="d-flex justify-content-center">
 			<form>
 				<div class="input-group my-3 search-container">
-					<input type="text" name="searched" class="form-control" placeholder="Ricerca una photo" />
+					<input @keyup="handleSearch" type="text" name="searched" class="form-control" placeholder="Ricerca una foto" />
 				</div>
 			</form>
 		</div>
 
 		<!-- If list is empty -->
 		<div v-if="!photos || photos.length === 0" class="title d-flex justify-content-center mt-5">
-			<h1>Non è presente nessuna photo</h1>
+			<h1>Non è presente nessuna foto</h1>
 		</div>
 
 		<!-- If list contains elements -->

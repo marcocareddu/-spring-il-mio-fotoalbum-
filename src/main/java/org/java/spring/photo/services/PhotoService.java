@@ -24,6 +24,9 @@ public class PhotoService {
 	public List<Photo> findByTitle(String searched) {
 		return photoRepository.findByTitleContainingOrDescriptionContainingIgnoreCase(searched, searched);
 	}
+	public List<Photo> findByTitleAndVisible(String searched) {
+		return photoRepository.findByTitleContainingIgnoreCaseAndVisibleTrue(searched);
+	}
 	public void save(Photo photo) {
 		photoRepository.save(photo);
 	}

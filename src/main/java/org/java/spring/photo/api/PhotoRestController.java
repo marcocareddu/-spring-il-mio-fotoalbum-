@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,11 +20,13 @@ public class PhotoRestController {
 
 	@Autowired
 	private PhotoService photoService;
-	
+
 	@GetMapping
-	public ResponseEntity<List<Photo>> getIndex() {
-		List<Photo> photos =  photoService.findAllVisible();
-		return new ResponseEntity<>(photos, HttpStatus.OK);
+	public ResponseEntity<List<Photo>> getIndex(@RequestParam(required = false) String searched) {
+
+	    List<Photo> photos = searched == null ? photoService.findAllVisible() : photoService.findByTitleAndVisible(searched);
+
+	    return new ResponseEntity<>(photos, HttpStatus.OK);
 	}
 
 	@GetMapping("{id}")

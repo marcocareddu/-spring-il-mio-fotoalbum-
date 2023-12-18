@@ -9,7 +9,7 @@ const props = defineProps({
   photo: {
     type: Object,
     required: true
-  }
+}
 });
 </script>
 
