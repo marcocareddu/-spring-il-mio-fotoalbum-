@@ -36,8 +36,7 @@ const sendMessage = async () => {
 			<!-- Categories -->
 			<div>
 				<h6 class="card-title mt-4">Categorie</h6>
-				<span v-for="category in photo.categories" :key="category.id" class="card-text my-2">{{ category.name }}
-				</span>
+				<span v-for="category in photo.categories" :key="category.id" v-text="category.name + ' '" class="card-text my-2"></span>
 			</div>
 
 			<!-- Single Card Buttons-->

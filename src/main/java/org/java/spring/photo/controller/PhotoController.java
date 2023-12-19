@@ -134,6 +134,7 @@ public class PhotoController {
 		model.addAttribute("user", new User());
 		return "RegistrationForm";
 	}
+	
 	@PostMapping("/signup")
 	public String storeUser(Model model, @Valid @ModelAttribute User user, BindingResult bindingResult) {
 
